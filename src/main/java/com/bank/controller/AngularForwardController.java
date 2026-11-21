@@ -7,22 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AngularForwardController {
 
-    @GetMapping({
-        "/bank/login",
-        "/bank/register",
-        "/bank/dashboard",
-        "/bank/account",
-        "/bank/transfer",
-        "/bank/transactions",
-        "/bank/otp",
-        "/bank/face-auth",
-        "/bank/loan",
-        "/bank/chatbot",
-        "/bank/profile",
-        "/bank/admin"
-    })
-    public String forwardToAngular() {
+   
+    
+    @GetMapping("/bank")
+    public String forwardBank() {
+        return "forward:/bank/index.html";
+    }
+
+    @GetMapping("/bank/{route:[a-zA-Z0-9-]+}")
+    public String forwardAngularRoutes() {
         return "forward:/bank/index.html";
     }
 }
+
+
 
