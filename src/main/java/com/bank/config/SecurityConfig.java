@@ -1,4 +1,7 @@
+
 package com.bank.config;
+
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +13,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.List;
-
 @Configuration
 public class SecurityConfig {
 
@@ -21,9 +22,7 @@ public class SecurityConfig {
 
         http
             .csrf(csrf -> csrf.disable())
-
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/**").permitAll()
                 .anyRequest().permitAll()
@@ -40,124 +39,31 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
-        CorsConfiguration configuration =
-                new CorsConfiguration();
+        CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(
-                List.of(
-                        "http://localhost:4200",
-                		"https://ai-bank-pniy.onrender.com"
-                )
-        );
+        configuration.setAllowedOrigins(List.of(
+            "http://localhost:4200",
+            "http://localhost:8080",
+            "https://ai-bank-pniy.onrender.com"
+        ));
 
-        configuration.setAllowedMethods(
-                List.of(
-                        "GET",
-                        "POST",
-                        "PUT",
-                        "DELETE",
-                        "OPTIONS"
-                )
-        );
+        configuration.setAllowedMethods(List.of(
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE",
+            "PATCH",
+            "OPTIONS"
+        ));
 
-        configuration.setAllowedHeaders(
-                List.of("*")
-        );
-
+        configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
 
-        source.registerCorsConfiguration(
-                "/**",
-                configuration
-        );
+        source.registerCorsConfiguration("/**", configuration);
 
         return source;
     }
 }
-
-
-
-
-//package com.bank.config;
-//
-//
-//
-//import java.util.List;
-//
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.security.web.SecurityFilterChain;
-//import org.springframework.web.cors.CorsConfiguration;
-//import org.springframework.web.cors.CorsConfigurationSource;
-//import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-//
-//@Configuration
-//public class SecurityConfig {
-////    @Bean
-////    PasswordEncoder passwordEncoder() {
-////        return new BCryptPasswordEncoder();
-////    }
-//
-////    @Bean
-////    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-////        http.csrf(csrf -> csrf.disable())
-////            .authorizeHttpRequests(auth -> auth
-////                .requestMatchers("/", "/index.html", "/app.js", "/style.css", "/api/auth/**", "/api/health").permitAll()
-////                .anyRequest().permitAll()
-////            );
-////        return http.build();
-////    }
-//    
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http)
-//            throws Exception {
-//
-//        http
-//            .csrf(csrf -> csrf.disable())
-//            .cors(cors -> {})
-//            .authorizeHttpRequests(auth -> auth
-//                .anyRequest().permitAll()
-//            );
-//
-//        return http.build();
-//    }
-//
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//    
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-//
-//        CorsConfiguration configuration = new CorsConfiguration();
-//
-//        configuration.setAllowedOrigins(
-//            List.of("http://localhost:4200")
-//        );
-//
-//        configuration.setAllowedMethods(
-//            List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")
-//        );
-//
-//        configuration.setAllowedHeaders(
-//            List.of("*")
-//        );
-//
-//        configuration.setAllowCredentials(true);
-//
-//        UrlBasedCorsConfigurationSource source =
-//            new UrlBasedCorsConfigurationSource();
-//
-//        source.registerCorsConfiguration("/**", configuration);
-//
-//        return source;
-//    }
-//}
-//
