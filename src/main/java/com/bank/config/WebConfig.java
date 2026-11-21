@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                         "http://localhost:4200",
                         "http://localhost:8080",
-                        "https://ai-bank-8mv7.onrender.com"
+                        "https://ai-bank-pniy.onrender.com"
                 )
                 .allowedMethods(
                         "GET",
